@@ -2,7 +2,6 @@
 
 
 ```
-$ https://github.com/martijn-benjamin/debunk-api.git && cd debunk-server && npm install 
+$ git clone https://github.com/martijn-benjamin/debunk-api.git && cd debunk-api && npm install && npm start
 
-$ npm start
 ```
