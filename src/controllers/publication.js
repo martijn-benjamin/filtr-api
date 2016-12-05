@@ -44,13 +44,14 @@ exports.list = async(function*(req, res) {
 });
 
 /**
- * get a publication doc by id
+ * Get a publication doc by id
  */
 exports.get = async(function*(req, res) {
 
     var result =
         yield r.table(_COLLECTION).get(req.params.id);
 
+    result == null ? res.statusCode = 404: res.statusCode = 200;
     res.send(result);
 });
 
