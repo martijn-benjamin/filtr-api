@@ -31,15 +31,15 @@ var {wrap: async} = require('co');
 var _COLLECTION = 'publication';
 
 /**
- * Get list of all publications
- *
- * @todo make this into a list of only doc id's
+ * Get list of all publications id's
  */
 exports.list = async(function*(req, res) {
 
     var result =
-        yield r.table(_COLLECTION);
-
+        yield r.table(_COLLECTION).map(function(obj)
+        {
+            return obj("id");
+        });
     res.send(result);
 });
 
