@@ -23,6 +23,7 @@
  */
 
 var publication = require('../controllers/publication');
+var subscription = require('../controllers/subscription');
 
 module.exports = function (app) {
 
@@ -53,6 +54,11 @@ module.exports = function (app) {
      * Delete publication
      */
     app.delete('/_api/publication/:id', publication.remove);
+
+    /**
+     * Insert subscription
+     */
+    app.post('/_api/subscription', subscription.insert);
 
     /**
      * Error handling
