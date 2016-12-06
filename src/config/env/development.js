@@ -24,5 +24,5 @@
 module.exports = {
     host: 'localhost',
     port: 2355,
-    db: 'debunk'
+    db: 'filtr'
 };

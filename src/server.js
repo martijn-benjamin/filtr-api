@@ -59,5 +59,5 @@ server.listen(config.port);
 /**
  * All done.
  */
-console.info('Express app started on port ' + config.port);
+console.info('Filtr API started on port ' + config.port);
 console.info("==================================================================================");

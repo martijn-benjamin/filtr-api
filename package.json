@@ -1,8 +1,8 @@
 {
-  "name": "debunk-api",
-  "description": "Debunk API",
+  "name": "filtr-api",
+  "description": "Filtr API",
   "keywords": [
-    "debunk",
+    "filtr",
     "api"
   ],
   "version": "0.0.1",
@@ -10,7 +10,7 @@
   "author": "martijn <martijn@spent-time.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/martijn-benjamin/debunk-api.git"
+    "url": "https://github.com/martijn-benjamin/filtr-api.git"
   },
   "license": "GPL-3.0",
   "engines": {
