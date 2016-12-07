@@ -42,6 +42,25 @@ exports.domain = async(function*(req, res) {
 });
 
 /**
+ * Bulk match domain names
+ */
+exports.bulk = async(function*(req, res) {
+
+    var domainArray = Object.keys(req.body).map(function (key) {
+        return key.toLowerCase();
+    });
+
+    var result =
+        yield r.table(_COLLECTION).filter(
+            function (doc) {
+                return r.expr(domainArray).contains(doc('domain'));
+            }
+        );
+
+    res.send(result);
+});
+
+/**
  * Get list of all publications id's
  */
 exports.list = async(function*(req, res) {

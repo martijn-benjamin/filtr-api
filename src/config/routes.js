@@ -33,6 +33,11 @@ module.exports = function (app) {
     app.get('/_api/search/domain/:domain', publication.domain);
 
     /**
+     * Bulk match domain names
+     */
+    app.put('/_api/search/domain', publication.bulk);
+
+    /**
      * List all publications
      */
     app.get('/_api/publication', publication.list);
