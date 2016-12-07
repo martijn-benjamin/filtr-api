@@ -27,8 +27,10 @@ var subscription = require('../controllers/subscription');
 
 module.exports = function (app) {
 
-    // @todo search
-    //app.get('/_api/publication/:filters', publication.search);
+    /**
+     * Search for match on domain name
+     */
+    app.get('/_api/search/domain/:domain', publication.domain);
 
     /**
      * List all publications

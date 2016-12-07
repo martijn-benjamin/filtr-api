@@ -31,13 +31,23 @@ var {wrap: async} = require('co');
 var _COLLECTION = 'publication';
 
 /**
+ * Simple search matching the domain name
+ */
+exports.domain = async(function*(req, res) {
+
+    var result =
+        yield r.table(_COLLECTION).filter({domain: req.params.domain});
+
+    res.send(result);
+});
+
+/**
  * Get list of all publications id's
  */
 exports.list = async(function*(req, res) {
 
     var result =
-        yield r.table(_COLLECTION).map(function(obj)
-        {
+        yield r.table(_COLLECTION).map(function (obj) {
             return obj("id");
         });
     res.send(result);
@@ -51,7 +61,7 @@ exports.get = async(function*(req, res) {
     var result =
         yield r.table(_COLLECTION).get(req.params.id);
 
-    result == null ? res.statusCode = 404: res.statusCode = 200;
+    result == null ? res.statusCode = 404 : res.statusCode = 200;
     res.send(result);
 });
 
