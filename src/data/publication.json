@@ -1,0 +1,354 @@
+[
+  {
+    "domain": "21stcenturywire.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "ActivistPost.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "BeforeItsNews.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "BigPZone.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "Chronicle.su",
+    "category": "clickbait"
+  },
+  {
+    "domain": "CoastToCoastAM.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "ConsciousLifeNews.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "ConservativeOutfitters.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "WideAwakeAmerica.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "CountdownToZeroTime.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "CounterPsyOps.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "DailyBuzzLive.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "Disclose.tv",
+    "category": "clickbait"
+  },
+  {
+    "domain": "FPRNradio.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "GeoEngineeringWatch.org",
+    "category": "clickbait"
+  },
+  {
+    "domain": "GlobalResearch.ca",
+    "category": "clickbait"
+  },
+  {
+    "domain": "GovtSlaves.info",
+    "category": "clickbait"
+  },
+  {
+    "domain": "gulagbound.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "JonesReport.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "HangTheBankers.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "HumansAreFree.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "Infowars.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "IntelliHub.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "LewRockwell.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "LibertyTalk.fm",
+    "category": "clickbait"
+  },
+  {
+    "domain": "LibertyVideos.org",
+    "category": "clickbait"
+  },
+  {
+    "domain": "LibertyMovementRadio.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "MegynKelly.us",
+    "category": "clickbait"
+  },
+  {
+    "domain": "NaturalNews.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "NewsWire-24.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "NoDisInfo.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "NowTheEndBegins.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "PakAlertPress.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "PoliticalBlindSpot.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "PrisonPlanet.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "PrisonPlanet.tv",
+    "category": "clickbait"
+  },
+  {
+    "domain": "RealFarmacy.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "RedFlagNews.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "TruthFrequencyRadio.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "TheDailySheeple.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "TheRunDownLive.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "UnconfirmedSources.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "VeteransToday.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "WakingUpWisconsin.com",
+    "category": "clickbait"
+  },
+  {
+    "domain": "WorldTruth.tv",
+    "category": "clickbait"
+  },
+  {
+    "domain": "AmericanNews.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "BigAmericanNews.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "ChristWire.org",
+    "category": "hoax"
+  },
+  {
+    "domain": "CivicTribune.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "ClickHole.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "CreamBMP.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "DCGazette.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "DailyCurrant.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "DCClothesLine.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "DerfMagazine.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "DrudgeReport.com.co",
+    "category": "hoax"
+  },
+  {
+    "domain": "DuhProgressive.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "EmpireNews.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "EnduringVision.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "MSNBC.co",
+    "category": "hoax"
+  },
+  {
+    "domain": "MSNBC.website",
+    "category": "hoax"
+  },
+  {
+    "domain": "MediaMass.net",
+    "category": "hoax"
+  },
+  {
+    "domain": "NationalReport.net",
+    "category": "hoax"
+  },
+  {
+    "domain": "NewsBiscuit.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "News-Hound.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "NewsMutiny.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "PoliticalEars.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "Private-eye.co.uk",
+    "category": "hoax"
+  },
+  {
+    "domain": "RealNewsRightNow.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "RileNews.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "Sprotspickle.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "TheNewsNerd.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "TheUsPatriot.com",
+    "category": "hoax"
+  },
+  {
+    "domain": "WitScience.org",
+    "category": "hoax"
+  },
+  {
+    "domain": "TheOnion.com",
+    "category": "satire"
+  },
+  {
+    "domain": "AmplifyingGlass.com",
+    "category": "satire"
+  },
+  {
+    "domain": "Duffleblog.com",
+    "category": "satire"
+  },
+  {
+    "domain": "EmpireSports.co",
+    "category": "satire"
+  },
+  {
+    "domain": "GomerBlog.com",
+    "category": "satire"
+  },
+  {
+    "domain": "Huzlers.com",
+    "category": "satire"
+  },
+  {
+    "domain": "iTagLive.com",
+    "category": "satire"
+  },
+  {
+    "domain": "Newslo.com",
+    "category": "satire"
+  },
+  {
+    "domain": "NahaDaily.com",
+    "category": "satire"
+  },
+  {
+    "domain": "RockCityTimes.com",
+    "category": "satire"
+  },
+  {
+    "domain": "TheLapine.ca",
+    "category": "satire"
+  },
+  {
+    "domain": "TheSpoof.com",
+    "category": "satire"
+  },
+  {
+    "domain": "WeeklyWorldNews.com",
+    "category": "satire"
+  },
+  {
+    "domain": "WorldNewsDailyReport.com",
+    "category": "satire"
+  },
+]
