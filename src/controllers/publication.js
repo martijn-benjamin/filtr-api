@@ -43,6 +43,8 @@ exports.domain = async(function*(req, res) {
 
 /**
  * Bulk match domain names
+ *
+ * @todo maybe we can avoid the object to array vv conversion
  */
 exports.bulk = async(function*(req, res) {
 
@@ -50,12 +52,19 @@ exports.bulk = async(function*(req, res) {
         return key.toLowerCase();
     });
 
-    var result =
+    var found =
         yield r.table(_COLLECTION).filter(
             function (doc) {
                 return r.expr(domainArray).contains(doc('domain'));
             }
         );
+
+    var result = {};
+
+    for (var i = 0; i < found.length; i++) {
+
+        result[found[i].domain] = found[i];
+    }
 
     res.send(result);
 });
