@@ -27,19 +27,14 @@
  */
 var r = require('../config/rethink').r;
 var {wrap: async} = require('co');
-
+var Publication = require("../model/Publication");
 var _COLLECTION = 'publication';
 
 /**
  * Get list of all publications id's
  */
 exports.list = async(function*(req, res) {
-
-    var result =
-        yield r.table(_COLLECTION).map(function(obj)
-        {
-            return obj("id");
-        });
+    var result = yield new Publication().find(true);
     res.send(result);
 });
 
@@ -47,33 +42,26 @@ exports.list = async(function*(req, res) {
  * Get a publication doc by id
  */
 exports.get = async(function*(req, res) {
-
-    var result =
-        yield r.table(_COLLECTION).get(req.params.id);
-
-    result == null ? res.statusCode = 404: res.statusCode = 200;
+    var publication = new Publication()
+    var result = yield publication.findFirstById(req.params.id)
+    result == null ? res.statusCode = 404 : res.statusCode = 200 ;
     res.send(result);
 });
 
 /**
- * create a publication doc
- *
- * @todo maybe only return the created id. returning full doc now.
- * @todo make it work for single and multiple docs
+ * Create publications and return their ids
  */
 exports.create = async(function*(req, res) {
-
-    var result =
-        yield r.table(_COLLECTION).insert(req.body, {returnChanges: true});
-
-    var docs = [];
-
-    for (var i = 0; i < result.changes.length; i++) {
-
-        docs.push(result.changes[i].new_val);
+    if (req.body !== undefined) {
+        var ids =
+            yield req.body.map(function (object) {
+                let publication = new Publication();
+                publication.setCategory(object.category);
+                publication.setDomain(object.domain);
+                return publication.create();
+            });
+        res.send(ids);
     }
-
-    res.send(docs);
 });
 
 /**
@@ -81,21 +69,23 @@ exports.create = async(function*(req, res) {
  */
 exports.update = async(function*(req, res) {
 
-    var result =
-        yield r.table(_COLLECTION).filter({id: req.params.id}).update(req.body);
+    if (req.body !== undefined) {
+        let publication = new Publication();
+        publication.setId(req.params.id);
+        publication.setCategory(req.body.category);
+        publication.setDomain(req.body.domain);
+        res.send(yield publication.update());
 
-    res.send(result);
+    }
 });
 
 /**
  * remove a publication doc
  */
 exports.remove = async(function*(req, res) {
-
-    var result =
-        yield r.table(_COLLECTION).filter({id: req.params.id}).delete();
-
-    res.send(result);
+   var publication = new  Publication()
+       publication.delete(req.params.id);
+   res.send("ok")
 });
 
 
