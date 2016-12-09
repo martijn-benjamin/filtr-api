@@ -1,16 +1,16 @@
-# debunk-api
+# filtr-api
 
 install [rethinkdb](https://www.rethinkdb.com) 
 
-create database 'debunk'
+create database 'filtr'
 
 create table 'publication'
+create table 'subscription'
 
 run below command in a terminal:
 
 ```
-$ git clone https://github.com/martijn-benjamin/debunk-api.git && cd debunk-api && npm install && npm start
-
+$ git clone https://github.com/martijn-benjamin/filtr-api.git && cd filtr-api && npm install && npm start
 ```
 
 

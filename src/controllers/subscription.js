@@ -17,12 +17,28 @@
 
 /**
  * <p>
- *     Development env
+ *     Controller for the publication docs
  *
  * @author martijn <martijn@spent-time.com>
  */
-module.exports = {
-    host: 'localhost',
-    port: 2355,
-    db: 'filtr'
-};
+
+/**
+ * Module dependencies.
+ */
+var r = require('../config/rethink').r;
+var {wrap: async} = require('co');
+
+var _COLLECTION = 'subscription';
+
+/**
+ * Insert and email address
+ */
+exports.insert = async(function*(req, res) {
+
+    yield r.table(_COLLECTION).insert(req.body);
+
+    res.send({
+        message: "ok"
+    });
+});
+

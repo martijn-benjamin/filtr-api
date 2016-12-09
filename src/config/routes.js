@@ -23,11 +23,19 @@
  */
 
 var publication = require('../controllers/publication');
+var subscription = require('../controllers/subscription');
 
 module.exports = function (app) {
 
-    // @todo search
-    //app.get('/_api/publication/:filters', publication.search);
+    /**
+     * Search for match on domain name
+     */
+    app.get('/_api/search/domain/:domain', publication.domain);
+
+    /**
+     * Bulk match domain names
+     */
+    app.put('/_api/search/domain', publication.bulk);
 
     /**
      * List all publications
@@ -53,6 +61,11 @@ module.exports = function (app) {
      * Delete publication
      */
     app.delete('/_api/publication/:id', publication.remove);
+
+    /**
+     * Insert subscription
+     */
+    app.post('/_api/subscription', subscription.insert);
 
     /**
      * Error handling

@@ -31,6 +31,45 @@ var Publication = require("../model/Publication");
 var _COLLECTION = 'publication';
 
 /**
+ * Simple search matching the domain name
+ */
+exports.domain = async(function*(req, res) {
+
+    var result =
+        yield r.table(_COLLECTION).filter({domain: req.params.domain});
+
+    res.send(result);
+});
+
+/**
+ * Bulk match domain names
+ *
+ * @todo maybe we can avoid the object to array vv conversion
+ */
+exports.bulk = async(function*(req, res) {
+
+    var domainArray = Object.keys(req.body).map(function (key) {
+        return key.toLowerCase();
+    });
+
+    var found =
+        yield r.table(_COLLECTION).filter(
+            function (doc) {
+                return r.expr(domainArray).contains(doc('domain'));
+            }
+        );
+
+    var result = {};
+
+    for (var i = 0; i < found.length; i++) {
+
+        result[found[i].domain] = found[i];
+    }
+
+    res.send(result);
+});
+
+/**
  * Get list of all publications id's
  */
 exports.list = async(function*(req, res) {
