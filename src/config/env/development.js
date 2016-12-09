@@ -24,5 +24,21 @@
 module.exports = {
     host: 'localhost',
     port: 2355,
-    db: 'filtr'
+    db: 'filtr',
+    tables: {
+        session: 'id',
+        users: 'id'
+    },
+    secret: process.env.COOKIE_SECRET,
+    facebook: {
+        clientID: process.env.FACEBOOK_CLIENTID,
+        clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL: 'http://localhost/auth/facebook/callback',
+        profileFields: ['id', 'displayName', 'email']
+    },
+    google: {
+        clientID: process.env.GOOGLE_CLIENTID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: 'http://localhost/auth/google/callback'
+    }
 };

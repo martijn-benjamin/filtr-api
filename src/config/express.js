@@ -21,11 +21,13 @@
  *
  * @author martijn <martijn@spent-time.com>
  */
-
+var config = require('./');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var compression = require('compression');
 var bodyParser = require('body-parser');
 
-module.exports = function (app) {
+module.exports = function (app, passport, sessionStore) {
 
     console.info('Configure Express');
 
@@ -41,4 +43,20 @@ module.exports = function (app) {
      */
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
+
+    /**
+     * Session store
+     */
+    app.use(cookieParser());
+    app.use(session({
+        resave: false,
+        saveUninitialized: false,
+        secret: config.secret,
+        store: sessionStore,
+        cookie: {secure: false}
+    }));
+
+    // use passport session
+    app.use(passport.initialize());
+    app.use(passport.session());
 };

@@ -25,6 +25,9 @@
 var config = require('./config');
 var express = require('express');
 var http = require('http');
+var session = require('express-session');
+var RethinkDBStore = require('express-session-rethinkdb')(session);
+var passport = require('passport');
 
 console.info("==================================================================================");
 console.info("                                                                                  ");
@@ -37,18 +40,26 @@ console.info("==================================================================
  */
 console.info('Start Server');
 
+var sessionStore = new RethinkDBStore({
+    connectOptions: {
+        db: config.db
+    }
+});
+
 var app = express();
 var server = http.Server(app);
 
 /**
  * Bootstrap
  *
+ * - Passport
  * - Express
  * - Routing
  * - RethinkDB
  */
-require('./config/express')(app);
-require('./config/routes')(app);
+require('./config/passport')(passport);
+require('./config/express')(app, passport, sessionStore);
+require('./config/routes')(app, passport);
 require('./config/rethink');
 
 /**
