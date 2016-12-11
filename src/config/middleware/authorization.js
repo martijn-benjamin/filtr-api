@@ -35,7 +35,7 @@ exports.requiresLogin = function (req, res, next) {
      */
     res.status(401);
 
-    res.send({"message": "requires authentication"});
+    return res.send({"message": "requires authentication"});
 };
 
 /**

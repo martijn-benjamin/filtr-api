@@ -46,7 +46,7 @@ module.exports = function (app, passport) {
     app.get('/auth/failed', function (req, res) {
 
         res.status(403);
-        res.send({message: 'Sign in failed'});
+        return res.send({message: 'Sign in failed'});
     });
 
     /**
@@ -110,6 +110,13 @@ module.exports = function (app, passport) {
     app.get('/_api/publisher/:id', publisher.get);
 
     /**
+     * Get user vote for a publisher
+     *
+     * @todo no auth? does not make much sense to fetch when no user id but we might want to have these votes open for the public?
+     */
+    app.get('/_api/vote/:id', publisher.vote);
+
+    /**
      * Vote up for a publisher
      */
     app.put('/_api/vote-up/:id', auth.requiresLogin, publisher.voteUp);
@@ -118,6 +125,11 @@ module.exports = function (app, passport) {
      * Vote down for a publisher
      */
     app.put('/_api/vote-down/:id', auth.requiresLogin, publisher.voteDown);
+
+    /**
+     * Tag a publisher
+     */
+    app.put('/_api/tag/:id', auth.requiresLogin, publisher.tag);
 
     /**
      * Create publication

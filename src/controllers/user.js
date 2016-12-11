@@ -51,11 +51,11 @@ function login(req, res) {
 
     if (path === '/auth/users/session') {
 
-        res.send(req.user);
+        return res.send(req.user);
 
     } else {
 
-        res.redirect(redirectTo);
+        return res.redirect(redirectTo);
     }
 }
 
@@ -66,5 +66,6 @@ exports.logout = function (req, res) {
 
     req.logout();
     res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-    res.send({'TimeToSay': 'Bye! Adiós! Doei! Au revoir! Tschüss! Ciao! さようなら! пока! tchau!'});
+
+    return res.send({'TimeToSay': 'Bye! Adiós! Doei! Au revoir! Tschüss! Ciao! さようなら! пока! tchau!'});
 };

@@ -36,7 +36,7 @@ exports.domain = async(function*(req, res) {
     var result =
         yield r.table(_COLLECTION).filter({type: 'Domain', name: req.params.domain});
 
-    res.send(result);
+    return res.send(result);
 });
 
 /**
@@ -47,7 +47,7 @@ exports.name = async(function*(req, res) {
     var result =
         yield r.table(_COLLECTION).filter({name: req.params.name});
 
-    res.send(result);
+    return res.send(result);
 });
 
 /**
@@ -75,7 +75,7 @@ exports.bulk = async(function*(req, res) {
         result[found[i].name] = found[i];
     }
 
-    res.send(result);
+    return res.send(result);
 });
 
 /**
@@ -86,11 +86,13 @@ exports.list = async(function*(req, res) {
     var result =
         yield new Publisher().find(false);
 
-    res.send(result);
+    return res.send(result);
 });
 
 /**
  * Get a Publisher by id
+ *
+ * @todo pretty quick and dirty collection of the tag count. could use some reviewing for efficiency and performance
  */
 exports.get = async(function*(req, res) {
 
@@ -99,9 +101,23 @@ exports.get = async(function*(req, res) {
     var result =
         yield publisher.findFirstById(req.params.id);
 
-    result == null ? res.statusCode = 404 : res.statusCode = 200;
+    if (result) {
 
-    res.send(result);
+        var tags = yield r.table('vote').filter({publicationId: req.params.id}).group('tag').count();
+
+        result['tags'] = {};
+
+        for (var i = 0; i < tags.length; i++) {
+
+            result['tags'][tags[i].group] = tags[i].reduction;
+        }
+
+    } else {
+
+        res.statusCode = 404;
+    }
+
+    return res.send(result);
 });
 
 /**
@@ -123,7 +139,7 @@ exports.create = async(function*(req, res) {
                 return publisher.create();
             });
 
-        res.send(ids);
+        return res.send(ids);
     }
 });
 
@@ -141,7 +157,7 @@ exports.update = async(function*(req, res) {
         publisher.setType(req.body.type);
         publisher.setScore(req.body.score);
 
-        res.send(yield publisher.update());
+        return res.send(yield publisher.update());
     }
 });
 
@@ -155,7 +171,25 @@ exports.remove = async(function*(req, res) {
     var result =
         yield publisher.delete(req.params.id);
 
-    res.send(result);
+    return res.send(result);
+});
+
+
+/**
+ * Get vote
+ */
+exports.vote = async(function*(req, res) {
+
+    console.info(req.user);
+
+    if (!req.user) {
+        return res.send([]);
+    }
+
+    var result =
+        yield r.table('vote').filter({publicationId: req.params.id, userId: req.user[0].id});
+
+    return res.send(result);
 });
 
 /**
@@ -165,14 +199,21 @@ exports.remove = async(function*(req, res) {
  */
 exports.voteUp = async(function*(req, res) {
 
-    var voted =
+    var entry =
         yield r.table('vote').filter({publicationId: req.params.id, userId: req.user[0].id});
 
-    // not voted yet
-    if (voted.length === 0) {
+    // not entry
+    if (entry.length === 0) {
 
-        yield r.table('vote').insert({publicationId: req.params.id, userId: req.user[0].id, score: 1});
+        // add entry for this publisher / user
+        yield r.table('vote').insert({
+            publicationId: req.params.id,
+            userId: req.user[0].id,
+            score: 1,
+            tag: ''
+        });
 
+        // update publisher overall count
         var result =
             yield r.table(_COLLECTION).get(req.params.id).update({
                 score: r.row('score').add(1).default(0)
@@ -182,20 +223,9 @@ exports.voteUp = async(function*(req, res) {
 
         return res.send(result);
 
-    } else if (voted.length > 1) {
+    } else if (entry[0].score === 1) {
 
-        // something wrong here
-        console.error('Multiple voting entries found');
-
-        res.statusCode = 500;
-
-        return res.send({
-            message: 'Multiple voting entries found'
-        });
-
-    } else if (voted[0].score === 1) {
-
-        // already upvoted
+        // already up voted
         res.statusCode = 403;
 
         return res.send({
@@ -204,13 +234,22 @@ exports.voteUp = async(function*(req, res) {
 
     } else {
 
-        // voted down before, double up vote
-        // @todo do we have to add that the vote can go back to 0 == neutral / not voted?
+        // user either has:
+        // 0 == not voted yet, we add 1
+        // -1 == previous down vote we add 2 to neutralize the down vote and add the up vote
+
+        var add = 1;
+
+        // we need to go from down vote to up vote
+        if (entry[0].score === -1) {
+            add = 2;
+        }
+
         yield r.table('vote').filter({publicationId: req.params.id, userId: req.user[0].id}).update({score: 1});
 
-        var result =
+        result =
             yield r.table(_COLLECTION).get(req.params.id).update({
-                score: r.row('score').add(2).default(0)
+                score: r.row('score').add(add)
             }, {
                 returnChanges: true
             });
@@ -226,15 +265,18 @@ exports.voteUp = async(function*(req, res) {
  */
 exports.voteDown = async(function*(req, res) {
 
-    var voted =
+    var entry =
         yield r.table('vote').filter({publicationId: req.params.id, userId: req.user[0].id});
 
-    console.info(voted);
+    // no entry
+    if (entry.length === 0) {
 
-    // not voted yet
-    if (voted.length === 0) {
-
-        yield r.table('vote').insert({publicationId: req.params.id, userId: req.user[0].id, score: -1});
+        yield r.table('vote').insert({
+            publicationId: req.params.id,
+            userId: req.user[0].id,
+            score: -1,
+            tag: ''
+        });
 
         var result =
             yield r.table(_COLLECTION).get(req.params.id).update({
@@ -245,20 +287,9 @@ exports.voteDown = async(function*(req, res) {
 
         return res.send(result);
 
-    } else if (voted.length > 1) {
+    } else if (entry[0].score === -1) {
 
-        // something wrong here
-        console.error('Multiple voting entries found');
-
-        res.statusCode = 500;
-
-        return res.send({
-            message: 'Multiple voting entries found'
-        });
-
-    } else if (voted[0].score === -1) {
-
-        // already downvoted
+        // already down voted
         res.statusCode = 403;
 
         return res.send({
@@ -267,17 +298,61 @@ exports.voteDown = async(function*(req, res) {
 
     } else {
 
-        // voted up before, double down vote
-        // @todo do we have to add that the vote can go back to 0 == neutral / not voted?
+        // user either has:
+        // 0 == not voted yet, we sub 1
+        // 1 == previous up vote we sub 2 to neutralize the up vote and add the down vote
+
+        var sub = 1;
+
+        // we need to go from down vote to up vote
+        if (entry[0].score === 1) {
+            sub = 2;
+        }
+
         yield r.table('vote').filter({publicationId: req.params.id, userId: req.user[0].id}).update({score: -1});
 
-        var result =
+        result =
             yield r.table(_COLLECTION).get(req.params.id).update({
-                score: r.row('score').sub(2).default(0)
+                score: r.row('score').sub(sub)
             }, {
                 returnChanges: true
             });
 
         return res.send(result);
     }
+});
+
+/**
+ * Tag
+ */
+exports.tag = async(function*(req, res) {
+
+    var tag = req.body.tag;
+
+    var tagged =
+        yield r.table('vote').filter({publicationId: req.params.id, userId: req.user[0].id});
+
+    console.info(tagged);
+
+    // not voted or tagged yet
+    if (tagged.length === 0) {
+
+        // neutral score & provided tag
+        yield r.table('vote').insert({
+            publicationId: req.params.id,
+            userId: req.user[0].id,
+            score: 0,
+            tag: tag
+        });
+
+    } else {
+
+        // update tag
+        yield r.table('vote').filter({publicationId: req.params.id, userId: req.user[0].id}).update({tag: tag});
+
+    }
+
+    return res.send({
+        message: 'ok'
+    });
 });
