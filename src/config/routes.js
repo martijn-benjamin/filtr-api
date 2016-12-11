@@ -77,6 +77,17 @@ module.exports = function (app, passport) {
 
     app.get('/auth/google/callback', pauth('google', fail), user.authCallback);
 
+    /**
+     * Signin with LinkedIn
+     */
+    app.get('/auth/linkedin',
+        pauth('linkedin', {
+
+            failureRedirect: '/auth/failed'
+
+        }), user.signin);
+
+    app.get('/auth/linkedin/callback', pauth('linkedin', fail), user.authCallback);
 
     /**
      * Search for match on domain name

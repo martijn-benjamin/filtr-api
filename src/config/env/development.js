@@ -40,5 +40,10 @@ module.exports = {
         clientID: process.env.GOOGLE_CLIENTID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: 'http://localhost/auth/google/callback'
+    },
+    linkedin: {
+        consumerKey: process.env.LINKEDIN_CONSUMER_KEY,
+        consumerSecret: process.env.LINKEDIN_CONSUMER_SECRET,
+        callbackURL: 'http://localhost/auth/linkedin/callback'
     }
 };

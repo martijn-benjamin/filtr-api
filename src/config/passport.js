@@ -25,7 +25,7 @@
 var r = require('../config/rethink').r;
 var facebook = require('./passport/facebook');
 var google = require('./passport/google');
-//var linkedin = require('passport-linkedin');
+var linkedin = require('./passport/linkedin');
 
 module.exports = function (passport) {
 
@@ -52,7 +52,7 @@ module.exports = function (passport) {
     // use these strategies
     passport.use(facebook);
     passport.use(google);
-    //passport.use(linkedin);
+    passport.use(linkedin);
 
     console.info('Using Strategies: facebook, google, linkedin');
 };
