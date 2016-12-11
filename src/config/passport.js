@@ -19,7 +19,7 @@
  * <p>
  *   Passport Authentication
  *
- * @author martijn <martijn@spent-time.com>
+ * @author martijn <martijn@cloud-coders.com>
  */
 
 var r = require('../config/rethink').r;

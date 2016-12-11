@@ -19,7 +19,7 @@
  * <p>
  *     Publisher model
  *
- * @author martijn <martijn@spent-time.com>
+ * @author martijn <martijn@cloud-coders.com>
  * @author denzyl <denzyl@live.nl>
  */
 

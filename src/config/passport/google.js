@@ -19,7 +19,7 @@
  * <p>
  *   Google Oauth Authentication
  *
- * @author martijn <martijn@spent-time.com>
+ * @author martijn <martijn@cloud-coders.com>
  */
 var r = require('../rethink').r;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;

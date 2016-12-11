@@ -19,7 +19,7 @@
  * <p>
  *     Setup env
  *
- * @author martijn <martijn@spent-time.com>
+ * @author martijn <martijn@cloud-coders.com>
  */
 
 var path = require('path');

@@ -19,7 +19,7 @@
  * <p>
  *   Generic require login routing middleware
  *
- * @author martijn <martijn@spent-time.com>
+ * @author martijn <martijn@cloud-coders.com>
  */
 exports.requiresLogin = function (req, res, next) {
 
